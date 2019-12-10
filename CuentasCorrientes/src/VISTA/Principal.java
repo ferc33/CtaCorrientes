@@ -48,7 +48,6 @@ public class Principal extends javax.swing.JFrame {
         txtBuscarRemitoObra = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
 
@@ -173,15 +172,6 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconosMaxi/icons8-o-26.png"))); // NOI18N
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 10, 30, 40));
-
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconosMaxi/icons8-google-web-search-70.png"))); // NOI18N
-        jButton1.setBorder(null);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/iconosMaxi/icons8-google-web-search-80.png"))); // NOI18N
-        jButton1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconosMaxi/icons8-google-web-search-80.png"))); // NOI18N
-        jButton1.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/iconosMaxi/icons8-google-web-search-80.png"))); // NOI18N
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 0, 50, 50));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 50, 160, -1));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 50, 160, -1));
 
@@ -235,7 +225,6 @@ public class Principal extends javax.swing.JFrame {
     public rsbuttom.RSButtonMetro btnRemito1;
     public rsbuttom.RSButtonMetro btnVerRemito;
     public javax.swing.JDesktopPane escritorio;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     public javax.swing.JPanel jPanel1;

@@ -14,9 +14,6 @@ public class main {
 
     public static void main(String[] args) {
         
-      
-        
-        
         Principal vista = new Principal();
         BaseDatos bd = new BaseDatos();
        
@@ -36,10 +33,6 @@ public class main {
         
         });*/
        
-      
-                                                                                                                                                                                                      
-                                                                                                                                                                                                               
-        
           try {
             // Set cross-platform Java L&F (also called "Metal")
         UIManager.setLookAndFeel(
