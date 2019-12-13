@@ -37,19 +37,18 @@ public class Principal extends javax.swing.JFrame {
 
         panelBack = new java.awt.Panel();
         escritorio = new javax.swing.JDesktopPane();
-        panelMenu = new javax.swing.JPanel();
-        btnRemito1 = new rsbuttom.RSButtonMetro();
-        btnLabelObra = new rsbuttom.RSButtonMetro();
-        btnVerRemito = new rsbuttom.RSButtonMetro();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         btnLabelCliente = new rsbuttom.RSButtonMetro();
+        btnLabelObra = new rsbuttom.RSButtonMetro();
+        btnRemito1 = new rsbuttom.RSButtonMetro();
+        laminaPrincipalAzul = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         btnLamina = new javax.swing.JButton();
-        txtBuscarRemitoCliente = new javax.swing.JTextField();
-        txtBuscarRemitoObra = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        jSeparator2 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 51, 51));
@@ -58,31 +57,90 @@ public class Principal extends javax.swing.JFrame {
         panelBack.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         escritorio.setPreferredSize(new java.awt.Dimension(640, 410));
+        escritorio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
-        escritorio.setLayout(escritorioLayout);
-        escritorioLayout.setHorizontalGroup(
-            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 680, Short.MAX_VALUE)
+        jPanel3.setBackground(new java.awt.Color(0, 0, 69));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel5.setBackground(new java.awt.Color(24, 19, 48));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIOLETA/antialiasing_rendering2.png"))); // NOI18N
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIOLETA/ant.png"))); // NOI18N
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIOLETA/atom.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
-        escritorioLayout.setVerticalGroup(
-            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 520, Short.MAX_VALUE)
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(67, 67, 67)
+                .addComponent(jLabel2)
+                .addGap(39, 39, 39))
         );
 
-        panelBack.add(escritorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(261, 59, 680, 520));
+        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 90, 100, 440));
 
-        panelMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel2.setBackground(new java.awt.Color(24, 19, 48));
+        jPanel2.setForeground(new java.awt.Color(24, 19, 48));
 
-        btnRemito1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/collection.png"))); // NOI18N
-        btnRemito1.setText("REMITO                      +");
+        btnLabelCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIOLETA/cliente.png"))); // NOI18N
+        btnLabelCliente.setText("Cliente");
+        btnLabelCliente.setActionCommand("");
+        btnLabelCliente.setColorBorde(null);
+        btnLabelCliente.setColorHover(new java.awt.Color(24, 19, 48));
+        btnLabelCliente.setColorNormal(new java.awt.Color(24, 19, 48));
+        btnLabelCliente.setColorPressed(new java.awt.Color(24, 19, 48));
+        btnLabelCliente.setColorTextHover(new java.awt.Color(0, 236, 154));
+        btnLabelCliente.setColorTextNormal(new java.awt.Color(153, 153, 153));
+        btnLabelCliente.setColorTextPressed(new java.awt.Color(24, 19, 48));
+        btnLabelCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnLabelCliente.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnLabelCliente.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnLabelCliente.setIconTextGap(25);
+
+        btnLabelObra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIOLETA/obra.png"))); // NOI18N
+        btnLabelObra.setText("Obra");
+        btnLabelObra.setActionCommand("");
+        btnLabelObra.setColorHover(new java.awt.Color(24, 19, 48));
+        btnLabelObra.setColorNormal(new java.awt.Color(24, 19, 48));
+        btnLabelObra.setColorPressed(new java.awt.Color(24, 19, 48));
+        btnLabelObra.setColorTextHover(new java.awt.Color(0, 236, 154));
+        btnLabelObra.setColorTextNormal(new java.awt.Color(153, 153, 153));
+        btnLabelObra.setColorTextPressed(new java.awt.Color(24, 19, 48));
+        btnLabelObra.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnLabelObra.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnLabelObra.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnLabelObra.setIconTextGap(25);
+
+        btnRemito1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIOLETA/remito.png"))); // NOI18N
+        btnRemito1.setText("Remito");
         btnRemito1.setActionCommand("");
-        btnRemito1.setColorHover(new java.awt.Color(204, 204, 204));
-        btnRemito1.setColorNormal(new java.awt.Color(214, 217, 223));
-        btnRemito1.setColorPressed(new java.awt.Color(204, 204, 204));
-        btnRemito1.setColorTextHover(new java.awt.Color(128, 128, 131));
-        btnRemito1.setColorTextNormal(new java.awt.Color(128, 128, 131));
-        btnRemito1.setColorTextPressed(new java.awt.Color(128, 128, 131));
+        btnRemito1.setColorHover(new java.awt.Color(24, 19, 48));
+        btnRemito1.setColorNormal(new java.awt.Color(24, 19, 48));
+        btnRemito1.setColorPressed(new java.awt.Color(24, 19, 48));
+        btnRemito1.setColorTextHover(new java.awt.Color(0, 236, 154));
+        btnRemito1.setColorTextNormal(new java.awt.Color(153, 153, 153));
+        btnRemito1.setColorTextPressed(new java.awt.Color(24, 19, 48));
+        btnRemito1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnRemito1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnRemito1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnRemito1.setIconTextGap(25);
@@ -91,61 +149,47 @@ public class Principal extends javax.swing.JFrame {
                 btnRemito1MousePressed(evt);
             }
         });
-        panelMenu.add(btnRemito1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 250, 50));
 
-        btnLabelObra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/home.png"))); // NOI18N
-        btnLabelObra.setText("OBRA                         +");
-        btnLabelObra.setActionCommand("");
-        btnLabelObra.setColorHover(new java.awt.Color(204, 204, 204));
-        btnLabelObra.setColorNormal(new java.awt.Color(214, 217, 223));
-        btnLabelObra.setColorPressed(new java.awt.Color(204, 204, 204));
-        btnLabelObra.setColorTextHover(new java.awt.Color(128, 128, 131));
-        btnLabelObra.setColorTextNormal(new java.awt.Color(128, 128, 131));
-        btnLabelObra.setColorTextPressed(new java.awt.Color(128, 128, 131));
-        btnLabelObra.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnLabelObra.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnLabelObra.setIconTextGap(25);
-        panelMenu.add(btnLabelObra, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 250, 50));
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(btnLabelCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60)
+                .addComponent(btnLabelObra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
+                .addComponent(btnRemito1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(379, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLabelCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLabelObra, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRemito1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
 
-        btnVerRemito.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/home.png"))); // NOI18N
-        btnVerRemito.setText("CUENTA CORRIENTE   +");
-        btnVerRemito.setActionCommand("");
-        btnVerRemito.setColorHover(new java.awt.Color(204, 204, 204));
-        btnVerRemito.setColorNormal(new java.awt.Color(214, 217, 223));
-        btnVerRemito.setColorPressed(new java.awt.Color(204, 204, 204));
-        btnVerRemito.setColorTextHover(new java.awt.Color(128, 128, 131));
-        btnVerRemito.setColorTextNormal(new java.awt.Color(128, 128, 131));
-        btnVerRemito.setColorTextPressed(new java.awt.Color(128, 128, 131));
-        btnVerRemito.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnVerRemito.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnVerRemito.setIconTextGap(25);
-        btnVerRemito.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnVerRemitoMousePressed(evt);
-            }
-        });
-        panelMenu.add(btnVerRemito, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 250, 50));
+        jPanel3.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -4, 950, 100));
 
-        btnLabelCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market.png"))); // NOI18N
-        btnLabelCliente.setText("CLIENTE                     +");
-        btnLabelCliente.setActionCommand("");
-        btnLabelCliente.setColorHover(new java.awt.Color(204, 204, 204));
-        btnLabelCliente.setColorNormal(new java.awt.Color(214, 217, 223));
-        btnLabelCliente.setColorPressed(new java.awt.Color(204, 204, 204));
-        btnLabelCliente.setColorTextHover(new java.awt.Color(128, 128, 131));
-        btnLabelCliente.setColorTextNormal(new java.awt.Color(128, 128, 131));
-        btnLabelCliente.setColorTextPressed(new java.awt.Color(128, 128, 131));
-        btnLabelCliente.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnLabelCliente.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnLabelCliente.setIconTextGap(25);
-        panelMenu.add(btnLabelCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 250, 40));
+        laminaPrincipalAzul.setBackground(new java.awt.Color(24, 0, 74));
+        laminaPrincipalAzul.setForeground(new java.awt.Color(51, 31, 48));
+        laminaPrincipalAzul.setLayout(new java.awt.BorderLayout());
+        jPanel3.add(laminaPrincipalAzul, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 850, 440));
 
-        panelBack.add(panelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 59, -1, 520));
+        escritorio.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 530));
 
-        jPanel1.setBackground(new java.awt.Color(51, 153, 255));
+        panelBack.add(escritorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 950, 530));
+
+        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnLamina.setBackground(new java.awt.Color(51, 51, 51));
+        btnLamina.setForeground(new java.awt.Color(0, 176, 255));
         btnLamina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/menu.png"))); // NOI18N
         btnLamina.setBorder(null);
         btnLamina.setContentAreaFilled(false);
@@ -155,27 +199,9 @@ public class Principal extends javax.swing.JFrame {
                 btnLaminaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnLamina, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 50, 40));
+        jPanel1.add(btnLamina, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 50, 50));
 
-        txtBuscarRemitoCliente.setBackground(new java.awt.Color(51, 153, 255));
-        txtBuscarRemitoCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtBuscarRemitoCliente.setBorder(null);
-        jPanel1.add(txtBuscarRemitoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 160, 40));
-
-        txtBuscarRemitoObra.setBackground(new java.awt.Color(51, 153, 255));
-        txtBuscarRemitoObra.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtBuscarRemitoObra.setBorder(null);
-        jPanel1.add(txtBuscarRemitoObra, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 10, 160, 40));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconosMaxi/icons8-c-26.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, 30, 40));
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconosMaxi/icons8-o-26.png"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 10, 30, 40));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 50, 160, -1));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 50, 160, -1));
-
-        panelBack.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 941, 58));
+        panelBack.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -197,20 +223,11 @@ public class Principal extends javax.swing.JFrame {
         this.btnLabelObra.setSelected(false);
         this.btnRemito1.setSelected(true);
         this.btnLabelCliente.setSelected(false);
-        this.btnVerRemito.setSelected(false);
+        
     }//GEN-LAST:event_btnRemito1MousePressed
 
-    private void btnVerRemitoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVerRemitoMousePressed
-
-    }//GEN-LAST:event_btnVerRemitoMousePressed
-
     private void btnLaminaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaminaActionPerformed
-         int posicion = this.panelMenu.getX();
-        if(posicion > -1 ){
-            Animacion.Animacion.mover_izquierda(0, -270, 2, 2, panelMenu);
-        }else{
-            Animacion.Animacion.mover_derecha(-270, 0, 2, 2, panelMenu);
-        }
+       
     }//GEN-LAST:event_btnLaminaActionPerformed
 
     /**
@@ -223,17 +240,16 @@ public class Principal extends javax.swing.JFrame {
     public rsbuttom.RSButtonMetro btnLabelObra;
     public javax.swing.JButton btnLamina;
     public rsbuttom.RSButtonMetro btnRemito1;
-    public rsbuttom.RSButtonMetro btnVerRemito;
     public javax.swing.JDesktopPane escritorio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     public javax.swing.JPanel jPanel1;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel5;
+    public javax.swing.JPanel laminaPrincipalAzul;
     public java.awt.Panel panelBack;
-    public javax.swing.JPanel panelMenu;
-    public javax.swing.JTextField txtBuscarRemitoCliente;
-    public javax.swing.JTextField txtBuscarRemitoObra;
     // End of variables declaration//GEN-END:variables
     public FrameObra frameObra;
 

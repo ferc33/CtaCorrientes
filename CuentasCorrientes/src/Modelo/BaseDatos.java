@@ -7,6 +7,7 @@ package Modelo;
 
 import java.sql.*;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class BaseDatos {
 
@@ -26,7 +27,7 @@ public class BaseDatos {
         try{
             
             conn = miConexion.dameConexion();
-            ps = conn.prepareStatement("SELECT RUTA_ARCHIVO FROM REMITO WHERE NUM_REMITO=?");
+            ps = conn.prepareStatement("SELECT ARCHIVO FROM REMITO WHERE NUM_REMITO=?");
             ps.setString(1, id);
             rs = ps.executeQuery();
             
@@ -51,7 +52,7 @@ public class BaseDatos {
 
             conn = miConexion.dameConexion();
 
-            ps = conn.prepareStatement("SELECT  NOM_CLIENTE,NOM_OBRA,ES_INSTALADOR_CLIENTE_,NUM_REMITO ,IMPORTE_CIERRE,RUTA_ARCHIVO FROM dbcta.REMITO INNER JOIN dbcta.CLIENTE ON dbcta.REMITO.ID_CLIENTE = dbcta.CLIENTE.ID_CLIENTE INNER JOIN dbcta.OBRA ON dbcta.REMITO.ID_OBRA=dbcta.OBRA.ID_OBRA WHERE NOM_CLIENTE=? AND NOM_OBRA=?"  );
+            ps = conn.prepareStatement("SELECT  NOM_CLIENTE,NOM_OBRA,ES_INSTALADOR_CLIENTE_,NUM_REMITO ,IMPORTE_CIERRE,ARCHIVO FROM dbcta.REMITO INNER JOIN dbcta.CLIENTE ON dbcta.REMITO.ID_CLIENTE = dbcta.CLIENTE.ID_CLIENTE INNER JOIN dbcta.OBRA ON dbcta.REMITO.ID_OBRA=dbcta.OBRA.ID_OBRA WHERE NOM_CLIENTE=? AND NOM_OBRA=?"  );
 
             ps.setString(1, cliente);
             ps.setString(2, obra);
@@ -75,7 +76,7 @@ public class BaseDatos {
 
             conn = miConexion.dameConexion();
 
-            ps = conn.prepareStatement("SELECT  NOM_CLIENTE,NOM_OBRA,ES_INSTALADOR_CLIENTE_,NUM_REMITO ,IMPORTE_CIERRE,RUTA_ARCHIVO FROM dbcta.REMITO INNER JOIN dbcta.CLIENTE ON dbcta.REMITO.ID_CLIENTE = dbcta.CLIENTE.ID_CLIENTE INNER JOIN dbcta.OBRA ON dbcta.REMITO.ID_OBRA=dbcta.OBRA.ID_OBRA WHERE NOM_CLIENTE LIKE" + "'"+ cliente + "%'" );
+            ps = conn.prepareStatement("SELECT  NOM_CLIENTE,NOM_OBRA,ES_INSTALADOR_CLIENTE_,NUM_REMITO ,IMPORTE_CIERRE,ARCHIVO FROM dbcta.REMITO INNER JOIN dbcta.CLIENTE ON dbcta.REMITO.ID_CLIENTE = dbcta.CLIENTE.ID_CLIENTE INNER JOIN dbcta.OBRA ON dbcta.REMITO.ID_OBRA=dbcta.OBRA.ID_OBRA WHERE NOM_CLIENTE LIKE" + "'"+ cliente + "%'" );
 
           
            
@@ -100,7 +101,7 @@ public class BaseDatos {
 
             conn = miConexion.dameConexion();
 
-            ps = conn.prepareStatement("SELECT  NOM_CLIENTE,NOM_OBRA,ES_INSTALADOR_CLIENTE_,NUM_REMITO ,IMPORTE_CIERRE,RUTA_ARCHIVO FROM dbcta.REMITO INNER JOIN dbcta.CLIENTE ON dbcta.REMITO.ID_CLIENTE = dbcta.CLIENTE.ID_CLIENTE INNER JOIN dbcta.OBRA ON dbcta.REMITO.ID_OBRA=dbcta.OBRA.ID_OBRA WHERE NOM_OBRA LIKE" + "'"+ nombreObra + "%'" );
+            ps = conn.prepareStatement("SELECT  NOM_CLIENTE,NOM_OBRA,ES_INSTALADOR_CLIENTE_,NUM_REMITO ,IMPORTE_CIERRE,ARCHIVO FROM dbcta.REMITO INNER JOIN dbcta.CLIENTE ON dbcta.REMITO.ID_CLIENTE = dbcta.CLIENTE.ID_CLIENTE INNER JOIN dbcta.OBRA ON dbcta.REMITO.ID_OBRA=dbcta.OBRA.ID_OBRA WHERE NOM_OBRA LIKE" + "'"+ nombreObra + "%'" );
 
             
             rs = ps.executeQuery();
@@ -124,7 +125,7 @@ public class BaseDatos {
 
             conn = miConexion.dameConexion();
 
-            ps = conn.prepareStatement("SELECT  NOM_CLIENTE,NOM_OBRA,ES_INSTALADOR_CLIENTE_,NUM_REMITO ,IMPORTE_CIERRE,RUTA_ARCHIVO FROM dbcta.REMITO INNER JOIN dbcta.CLIENTE ON dbcta.REMITO.ID_CLIENTE = dbcta.CLIENTE.ID_CLIENTE INNER JOIN dbcta.OBRA ON dbcta.REMITO.ID_OBRA=dbcta.OBRA.ID_OBRA WHERE  NOM_CLIENTE=?");
+            ps = conn.prepareStatement("SELECT  NOM_CLIENTE,NOM_OBRA,ES_INSTALADOR_CLIENTE_,NUM_REMITO ,IMPORTE_CIERRE,ARCHIVO FROM dbcta.REMITO INNER JOIN dbcta.CLIENTE ON dbcta.REMITO.ID_CLIENTE = dbcta.CLIENTE.ID_CLIENTE INNER JOIN dbcta.OBRA ON dbcta.REMITO.ID_OBRA=dbcta.OBRA.ID_OBRA WHERE  NOM_CLIENTE=?");
             ps.setString(1, nombreCliente);
             rs = ps.executeQuery();
 
@@ -266,7 +267,7 @@ public class BaseDatos {
      public void insertRemito(Remito remito){
         
         Connection conn = null;
-        ResultSet rs = null;
+      
         PreparedStatement ps=null;
         
        
@@ -274,7 +275,7 @@ public class BaseDatos {
             
             conn = miConexion.dameConexion();
             
-            ps = conn.prepareStatement("INSERT INTO remito(NUM_REMITO,FECHA_REMITO,RUTA_ARCHIVO,IMPORTE_CIERRE,ID_OBRA,ID_CLIENTE) VALUES(?,?,?,?,?,?)");
+            ps = conn.prepareStatement("INSERT INTO dbcta.REMITO(NUM_REMITO,FECHA_REMITO,ARCHIVO,IMPORTE_CIERRE,ID_OBRA,ID_CLIENTE) VALUES(?,?,?,?,?,?)");
             
             ps.setString(1, remito.getNumRemito());
             ps.setString(2, remito.getFechaRemito());
@@ -284,11 +285,11 @@ public class BaseDatos {
             ps.setInt(6, remito.getIdCliente());
             
             
-            ps.execute();
+            ps.executeQuery();
             
           
         }catch(Exception e){
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "NO SE AH INSERTADO EL REMITO VERIFIQUE LO SIGUIENTE\nError-->" + e);
         }
        
     }
@@ -322,7 +323,7 @@ public class BaseDatos {
         
             
         }catch(Exception e){
-            e.printStackTrace();
+           JOptionPane.showMessageDialog(null, "Error-->" + e);
         }
         return listaobra;
     }

@@ -48,7 +48,8 @@ public class ControladorEvento {
 
     private DefaultComboBoxModel modeloComboObra = new DefaultComboBoxModel();
     private DefaultComboBoxModel modeloComboClientes = new DefaultComboBoxModel();
-    private final String rutaPrincipal = "C:/Users/maxid/remitos";
+    private final String rutaPrincipal1 = "C:/Users/maxid/remitos";
+    private final String rutaPrincipal = "/home/ferc/Imagenes/remitos";
     private CrearCarpetaCliente createFile;
     String rutaRemito = "";
     String seleccion1 = "";
@@ -56,7 +57,7 @@ public class ControladorEvento {
     private String path = null;
 
     public ControladorEvento(Principal vista, BaseDatos bd, FrameCliente frameCliente, FrameObra frameObra,
-            FrameRemito frameRemito) {
+                                                                                    FrameRemito frameRemito) {
 
         this.vista = vista;
         this.bd = bd;
@@ -76,10 +77,10 @@ public class ControladorEvento {
 
                 int posicion = vista.panelMenu.getX();
                 if (posicion > -1) {
-                    Animacion.Animacion.mover_izquierda(0, -270, 2, 2, vista.panelMenu);
+                    Animacion.Animacion.mover_izquierda(10, -270, 5, 10, vista.panelMenu);
 
                 } else {
-                    Animacion.Animacion.mover_derecha(-270, 0, 2, 2, vista.panelMenu);
+                    Animacion.Animacion.mover_derecha(-270, 10, 5, 10, vista.panelMenu);
                 }
             }
 
@@ -94,6 +95,7 @@ public class ControladorEvento {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                
             }
 
         });
@@ -104,11 +106,11 @@ public class ControladorEvento {
 
                 if (!frameObra.isVisible()) {
 
-                    vista.escritorio.add(frameObra);
-                    vista.escritorio.getDesktopManager().maximizeFrame(frameObra);
+                    vista.laminaPrincipalAzul.add(frameObra);
+                   
                     frameObra.setVisible(true);
                 } else {
-                    vista.escritorio.getDesktopManager().maximizeFrame(frameObra);
+                   frameObra.setVisible(false);
                 }
             }
 
@@ -145,11 +147,11 @@ public class ControladorEvento {
                 }*/
                 if (!frameRemito.isVisible()) {
 
-                    vista.escritorio.add(frameRemito);
-                    vista.escritorio.getDesktopManager().maximizeFrame(frameRemito);
+                    vista.laminaPrincipalAzul.add(frameRemito);
+                    
                     frameRemito.setVisible(true);
                 } else {
-                    vista.escritorio.getDesktopManager().maximizeFrame(frameRemito);
+                     frameRemito.setVisible(false);
                 }
 
             }
@@ -162,11 +164,12 @@ public class ControladorEvento {
 
                 if (!frameCliente.isVisible()) {
 
-                    vista.escritorio.add(frameCliente);
-                    vista.escritorio.getDesktopManager().maximizeFrame(frameCliente);
+                    vista.laminaPrincipalAzul.add(frameCliente);
+                    
                     frameCliente.setVisible(true);
                 } else {
-                    vista.escritorio.getDesktopManager().maximizeFrame(frameCliente);
+                   
+                    frameCliente.setVisible(false);
                 }
             }
 
@@ -201,12 +204,12 @@ public class ControladorEvento {
                 createFile = new CrearCarpetaCliente();
                 File remito = getFile();
                 String nombreCarpetaObra = frameRemito.ComboObra.getSelectedItem().toString();
-                String path = "";
+
                 int idCliente = frameRemito.ComboClientes.getSelectedIndex() + 1;
                 int idObra = frameRemito.ComboObra.getSelectedIndex() + 1;
                 String pathRemito = remito.getAbsolutePath();
                 String numRemito = frameRemito.txtNumRemito.getText();
-                String fechaRemito = frameRemito.txtFechaRemito.getText();
+                String fechaRemito = frameRemito.JData.getDateFormatString();
 
                 String nombreRemito = remito.getName();
                 String nombreCarpetaCliente = frameRemito.ComboClientes.getSelectedItem().toString();
@@ -216,9 +219,10 @@ public class ControladorEvento {
                     createFile.crearCarpeta(pathRemito, rutaPrincipal + "/" + nombreCarpetaCliente + "/" + nombreCarpetaObra + "/" + nombreRemito);
                     createFile.renameFile(pathRemito, rutaPrincipal + "/" + nombreCarpetaCliente + "/" + nombreCarpetaObra + "/" + numRemito + " " + fechaRemito + ".pdf");
                     createFile.moveFile(pathRemito, rutaPrincipal + "/" + nombreCarpetaCliente + "/" + nombreCarpetaObra + "/" + nombreRemito);
+                   
                     if (frameRemito.checkbox.isSelected()) {
                         importe = Double.parseDouble(frameRemito.txtImporteRemito.getText());
-                    } else {
+                                                                                                        } else {
                         importe = 0;
                     }
                     insertaRemito(numRemito, fechaRemito, rutaPrincipal + "/" + nombreCarpetaCliente + "/" + nombreCarpetaObra + "/" + numRemito + " " + fechaRemito + ".pdf", idObra, idCliente, importe);
@@ -242,61 +246,7 @@ public class ControladorEvento {
             }
         });
 
-        this.vista.txtBuscarRemitoObra.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-
-                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-
-                    limpiarTabla();
-                    String criterio = vista.txtBuscarRemitoCliente.getText();
-                    String obra = vista.txtBuscarRemitoObra.getText();
-                 //   recibeCTAPorCriterio(criterio, obra);
-                           if (obra.equals("")) {
-                           
-                           recibeCTAPorCliente(criterio);
-
-                    } else if (!obra.equals("") && !criterio.equals("")) {
-                        
-                           recibeCTAPorClienteyObra(criterio, obra);
-                        
-                    }
-
-                    frameRemito.tablaRemitos.setModel(modeloTablaRemitos);
-                }
-            }
-        });
-
-        this.vista.txtBuscarRemitoCliente.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-
-                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-
-                           limpiarTabla();
-                    String criterio = vista.txtBuscarRemitoCliente.getText();
-                    String obra = vista.txtBuscarRemitoObra.getText();
-                    
-                    
-                       if (obra.equals("")) {
-                           
-                           recibeCTAPorCliente(criterio);
-
-                    } else if (!obra.equals("") && !criterio.equals("")) {
-                        
-                           recibeCTAPorClienteyObra(criterio, obra);
-                        
-                    }
-                    //     recibeCTAPorCriterio(criterio,obra);
-
-                        frameRemito.tablaRemitos.setModel(modeloTablaRemitos);
-                 
-
-                }
-
-            }
-
-        });
+    
 
         frameRemito.ComboClientes.addActionListener(new ActionListener() {
             @Override
@@ -327,7 +277,7 @@ public class ControladorEvento {
 
                 String criterio = frameRemito.txtBuscarRemito.getText();
 
-                  recibeCTAPorCriterio(criterio);
+                recibeCTAPorCriterio(criterio);
                 frameRemito.tablaRemitos.setModel(modeloTablaRemitos);
             }
 
@@ -375,12 +325,12 @@ public class ControladorEvento {
         }
 
     }
-    
+
     public void recibeCTAPorCliente(String cliente) {
 
         ResultSet rs = null;
 
-            rs = bd.dameCtaPorCliente2(cliente);
+        rs = bd.dameCtaPorCliente2(cliente);
         try {
 
             ResultSetMetaData metaData = rs.getMetaData();
@@ -410,10 +360,6 @@ public class ControladorEvento {
         }
 
     }
-    
-     
-
-    
 
     public void recibeCTAPorClienteyObra(String cliente, String obra) {
 
