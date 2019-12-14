@@ -176,7 +176,7 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel3.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -4, 950, 100));
 
-        laminaPrincipalAzul.setBackground(new java.awt.Color(24, 0, 74));
+        laminaPrincipalAzul.setBackground(new java.awt.Color(24, 12, 48));
         laminaPrincipalAzul.setForeground(new java.awt.Color(51, 31, 48));
         laminaPrincipalAzul.setLayout(new java.awt.BorderLayout());
         jPanel3.add(laminaPrincipalAzul, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 850, 440));
@@ -185,7 +185,7 @@ public class Principal extends javax.swing.JFrame {
 
         panelBack.add(escritorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 950, 530));
 
-        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel1.setBackground(new java.awt.Color(51, 0, 51));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnLamina.setBackground(new java.awt.Color(51, 51, 51));

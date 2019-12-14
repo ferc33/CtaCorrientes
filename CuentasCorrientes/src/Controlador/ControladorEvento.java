@@ -35,6 +35,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 public class ControladorEvento {
 
@@ -209,7 +210,7 @@ public class ControladorEvento {
                 int idObra = frameRemito.ComboObra.getSelectedIndex() + 1;
                 String pathRemito = remito.getAbsolutePath();
                 String numRemito = frameRemito.txtNumRemito.getText();
-                String fechaRemito = frameRemito.JData.getDateFormatString();
+                String fechaRemito = frameRemito.JDate.getText();
 
                 String nombreRemito = remito.getName();
                 String nombreCarpetaCliente = frameRemito.ComboClientes.getSelectedItem().toString();
@@ -448,6 +449,10 @@ public class ControladorEvento {
         modeloTablaRemitos.addColumn("Numero remito");
         modeloTablaRemitos.addColumn("Importe");
         modeloTablaRemitos.addColumn("Archivo");
+        
+        TableColumn colum = new TableColumn();
+        
+        
     }
 
     private void cargarModeloCombocliente() {
@@ -503,7 +508,7 @@ public class ControladorEvento {
 
             while (rs.next()) {
 
-                rutaRemito = rs.getString("RUTA_ARCHIVO");
+                rutaRemito = rs.getString("ARCHIVO");
             }
 
         } catch (Exception e) {
