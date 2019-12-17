@@ -186,6 +186,7 @@ public class FrameCliente extends javax.swing.JInternalFrame {
         comboClientes.setBackground(new java.awt.Color(12, 0, 47));
         comboClientes.setFont(new java.awt.Font("Decker", 1, 18)); // NOI18N
         comboClientes.setForeground(new java.awt.Color(255, 255, 255));
+        comboClientes.setFocusable(false);
         laminaCliente.add(comboClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 90, 310, 40));
 
         btnEliminarCliente.setBackground(new java.awt.Color(12, 0, 47));
@@ -235,8 +236,7 @@ public class FrameCliente extends javax.swing.JInternalFrame {
                                                
 
     private void btnEliminarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarClienteActionPerformed
-        this.btnLabelModificar.setSelected(false);
-        this.btnLabelEliminar.setSelected(true);
+        
 
     }//GEN-LAST:event_btnEliminarClienteActionPerformed
 

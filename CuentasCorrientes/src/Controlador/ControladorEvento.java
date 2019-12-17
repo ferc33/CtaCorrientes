@@ -72,6 +72,7 @@ public class ControladorEvento {
 
         cargarModeloComboObra();
 
+        
         //MODIFICAR EL CLIENTE
         this.frameCliente.btnModificarCliente.addActionListener(new ActionListener() {
             @Override
@@ -100,10 +101,16 @@ public class ControladorEvento {
                 int indice = frameCliente.comboClientes.getSelectedIndex() + 1;
 
                 Cliente n = new Cliente(indice);
-
-                bd.eliminaCliente(n);
+                
+                if(n!=null){
+                       bd.eliminaCliente(n);
                 
                   refrescarClientes(n);
+                }else{
+                    JOptionPane.showMessageDialog(null, "No se puede eliminar" + n);
+                }
+
+             
 
             }
 
@@ -531,6 +538,8 @@ public class ControladorEvento {
                     String numRemito = (String) this.frameRemito.tablaRemitos.getValueAt(rown, 3);
 
                     verRemito(numRemito);
+                    
+                    System.out.println("REMITO ");
 
                     try {
                         Desktop.getDesktop().open(new File(rutaRemito));
