@@ -16,6 +16,73 @@ public class BaseDatos {
         miConexion = new Conexion();
 
     }
+    //MOSTRAR CLIENTES 
+    
+    //MODIFICAR CLIENTE 
+     public void modificarCliente(Cliente c) {
+        Connection conn = null;
+
+        PreparedStatement ps = null;
+
+        try {
+            conn = miConexion.dameConexion();
+
+            ps = conn.prepareStatement("UPDATE db_cta.CLIENTE SET NOM_CLIENTE = ? WHERE ID_CLIENTE = ?");
+
+            ps.setString(1, c.getNombreCliente());
+            ps.setInt(2, c.getIdCliente());
+            
+            ps.executeUpdate();
+            System.out.println(ps.execute());
+
+        } catch (Exception e) {
+          JOptionPane.showMessageDialog(null, "Error al modificar, compruebe que \nno tenga cuentas corrientes por borrar\n+ " + "e");
+
+        } finally {
+            try {
+
+                ps.close();
+                conn.close();
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+
+        }
+
+    }
+    //ELIMINAR CLIENTE
+    public void eliminaCliente(Cliente p) {
+        Connection conn = null;
+
+        PreparedStatement ps = null;
+
+        try {
+            conn = miConexion.dameConexion();
+
+            ps = conn.prepareStatement("DELETE FROM db_cta.CLIENTE WHERE ID_CLIENTE = ?");
+
+            ps.setInt(1, p.getIdCliente());
+
+            ps.executeUpdate();
+            
+            System.out.println("Cliente eliminado");
+
+        } catch (Exception e) {
+            System.out.println("Error en delete de persona");
+
+        } finally {
+            try {
+
+                ps.close();
+                conn.close();
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+
+        }
+    }
 
      public ResultSet getRemito(String id){
         
@@ -27,7 +94,7 @@ public class BaseDatos {
         try{
             
             conn = miConexion.dameConexion();
-            ps = conn.prepareStatement("SELECT ARCHIVO FROM REMITO WHERE NUM_REMITO=?");
+            ps = conn.prepareStatement("SELECT ARCHIVO FROM db_cta.REMITO WHERE NUM_REMITO=?");
             ps.setString(1, id);
             rs = ps.executeQuery();
             
@@ -52,7 +119,7 @@ public class BaseDatos {
 
             conn = miConexion.dameConexion();
 
-            ps = conn.prepareStatement("SELECT  NOM_CLIENTE,NOM_OBRA,ES_INSTALADOR_CLIENTE_,NUM_REMITO ,IMPORTE_CIERRE,ARCHIVO FROM dbcta.REMITO INNER JOIN dbcta.CLIENTE ON dbcta.REMITO.ID_CLIENTE = dbcta.CLIENTE.ID_CLIENTE INNER JOIN dbcta.OBRA ON dbcta.REMITO.ID_OBRA=dbcta.OBRA.ID_OBRA WHERE NOM_CLIENTE=? AND NOM_OBRA=?"  );
+            ps = conn.prepareStatement("SELECT  NOM_CLIENTE,NOM_OBRA,ES_INSTALADOR_CLIENTE_,NUM_REMITO ,IMPORTE_CIERRE,ARCHIVO FROM db_cta.REMITO INNER JOIN db_cta.CLIENTE ON db_cta.REMITO.ID_CLIENTE = db_cta.CLIENTE.ID_CLIENTE INNER JOIN db_cta.OBRA ON db_cta.REMITO.ID_OBRA=db_cta.OBRA.ID_OBRA WHERE NOM_CLIENTE=? AND NOM_OBRA=?"  );
 
             ps.setString(1, cliente);
             ps.setString(2, obra);
@@ -76,7 +143,7 @@ public class BaseDatos {
 
             conn = miConexion.dameConexion();
 
-            ps = conn.prepareStatement("SELECT  NOM_CLIENTE,NOM_OBRA,ES_INSTALADOR_CLIENTE_,NUM_REMITO ,IMPORTE_CIERRE,ARCHIVO FROM dbcta.REMITO INNER JOIN dbcta.CLIENTE ON dbcta.REMITO.ID_CLIENTE = dbcta.CLIENTE.ID_CLIENTE INNER JOIN dbcta.OBRA ON dbcta.REMITO.ID_OBRA=dbcta.OBRA.ID_OBRA WHERE NOM_CLIENTE LIKE" + "'"+ cliente + "%'" );
+            ps = conn.prepareStatement("SELECT  NOM_CLIENTE,NOM_OBRA,ES_INSTALADOR_CLIENTE_,NUM_REMITO ,IMPORTE_CIERRE,ARCHIVO FROM db_cta.REMITO INNER JOIN db_cta.CLIENTE ON db_cta.REMITO.ID_CLIENTE = db_cta.CLIENTE.ID_CLIENTE INNER JOIN db_cta.OBRA ON db_cta.REMITO.ID_OBRA=db_cta.OBRA.ID_OBRA WHERE NOM_CLIENTE LIKE" + "'"+ cliente + "%'" );
 
           
            
@@ -101,7 +168,7 @@ public class BaseDatos {
 
             conn = miConexion.dameConexion();
 
-            ps = conn.prepareStatement("SELECT  NOM_CLIENTE,NOM_OBRA,ES_INSTALADOR_CLIENTE_,NUM_REMITO ,IMPORTE_CIERRE,ARCHIVO FROM dbcta.REMITO INNER JOIN dbcta.CLIENTE ON dbcta.REMITO.ID_CLIENTE = dbcta.CLIENTE.ID_CLIENTE INNER JOIN dbcta.OBRA ON dbcta.REMITO.ID_OBRA=dbcta.OBRA.ID_OBRA WHERE NOM_OBRA LIKE" + "'"+ nombreObra + "%'" );
+            ps = conn.prepareStatement("SELECT  NOM_CLIENTE,NOM_OBRA,ES_INSTALADOR_CLIENTE_,NUM_REMITO ,IMPORTE_CIERRE,ARCHIVO FROM db_cta.REMITO INNER JOIN db_cta.CLIENTE ON db_cta.REMITO.ID_CLIENTE = db_cta.CLIENTE.ID_CLIENTE INNER JOIN db_cta.OBRA ON db_cta.REMITO.ID_OBRA=db_cta.OBRA.ID_OBRA WHERE NOM_OBRA LIKE" + "'"+ nombreObra + "%'" );
 
             
             rs = ps.executeQuery();
@@ -125,7 +192,7 @@ public class BaseDatos {
 
             conn = miConexion.dameConexion();
 
-            ps = conn.prepareStatement("SELECT  NOM_CLIENTE,NOM_OBRA,ES_INSTALADOR_CLIENTE_,NUM_REMITO ,IMPORTE_CIERRE,ARCHIVO FROM dbcta.REMITO INNER JOIN dbcta.CLIENTE ON dbcta.REMITO.ID_CLIENTE = dbcta.CLIENTE.ID_CLIENTE INNER JOIN dbcta.OBRA ON dbcta.REMITO.ID_OBRA=dbcta.OBRA.ID_OBRA WHERE  NOM_CLIENTE=?");
+            ps = conn.prepareStatement("SELECT  NOM_CLIENTE,NOM_OBRA,ES_INSTALADOR_CLIENTE_,NUM_REMITO ,IMPORTE_CIERRE,ARCHIVO FROM db_cta.REMITO INNER JOIN db_cta.CLIENTE ON db_cta.REMITO.ID_CLIENTE = db_cta.CLIENTE.ID_CLIENTE INNER JOIN db_cta.OBRA ON db_cta.REMITO.ID_OBRA=db_cta.OBRA.ID_OBRA WHERE  NOM_CLIENTE=?");
             ps.setString(1, nombreCliente);
             rs = ps.executeQuery();
 
@@ -149,7 +216,7 @@ public class BaseDatos {
             
             conn = miConexion.dameConexion();
             
-            ps = conn.prepareStatement("INSERT INTO CLIENTE(NOM_CLIENTE,TEL_CLIENTE,EMAIL_CLIENTE,ES_INSTALADOR_CLIENTE_) VALUES(?,?,?,?)");
+            ps = conn.prepareStatement("INSERT INTO db_cta.CLIENTE(NOM_CLIENTE,TEL_CLIENTE,EMAIL_CLIENTE,ES_INSTALADOR_CLIENTE_) VALUES(?,?,?,?)");
             
             ps.setString(1, nuevoCliente.getNombreCliente());
             ps.setString(2, nuevoCliente.getTelCliente());
@@ -177,13 +244,15 @@ public class BaseDatos {
             
             conn = miConexion.dameConexion();
             
-            ps = conn.prepareStatement("INSERT INTO OBRA(NOM_OBRA,ID_CLIENTE) VALUES(?,?)");
+            ps = conn.prepareStatement("INSERT INTO db_cta.OBRA(NOM_OBRA,ID_CLIENTE) VALUES(?,?)");
             
             ps.setString(1, nuevaObra.getNombreObra());
             ps.setInt(2, nuevaObra.getIdCliente());
           
             
             ps.execute();
+            
+            System.out.println("INSERT OBRA ERROR");
             
             
             
@@ -206,7 +275,7 @@ public class BaseDatos {
              
              conn = miConexion.dameConexion();
              
-             ps = conn.prepareStatement("SELECT NOM_OBRA FROM dbcta.OBRA WHERE ID_CLIENTE = ?");
+             ps = conn.prepareStatement("SELECT NOM_OBRA FROM db_cta.OBRA WHERE ID_CLIENTE = ?");
              
              ps.setInt(1,criterio);
              
@@ -228,7 +297,7 @@ public class BaseDatos {
          return listaObra;
     }
     
-   
+  
     
     public ArrayList selectClientes(){
         
@@ -244,7 +313,7 @@ public class BaseDatos {
             
             st = conn.createStatement();
             
-            rs = st.executeQuery("SELECT NOM_CLIENTE FROM CLIENTE");
+            rs = st.executeQuery("SELECT NOM_CLIENTE FROM db_cta.CLIENTE");
             
             while(rs.next()){
                 
@@ -261,6 +330,7 @@ public class BaseDatos {
         }catch(Exception e){
             e.printStackTrace();
         }
+       
         return listaClientes;
     }
     
@@ -275,7 +345,7 @@ public class BaseDatos {
             
             conn = miConexion.dameConexion();
             
-            ps = conn.prepareStatement("INSERT INTO dbcta.REMITO(NUM_REMITO,FECHA_REMITO,ARCHIVO,IMPORTE_CIERRE,ID_OBRA,ID_CLIENTE) VALUES(?,?,?,?,?,?)");
+            ps = conn.prepareStatement("INSERT INTO db_cta.REMITO(NUM_REMITO,FECHA_REMITO,ARCHIVO,IMPORTE_CIERRE,ID_OBRA,ID_CLIENTE) VALUES(?,?,?,?,?,?)");
             
             ps.setString(1, remito.getNumRemito());
             ps.setString(2, remito.getFechaRemito());
@@ -309,7 +379,7 @@ public class BaseDatos {
             
             st = conn.createStatement();
             
-            rs = st.executeQuery("SELECT NOM_OBRA FROM OBRA");
+            rs = st.executeQuery("SELECT NOM_OBRA FROM db_cta.OBRA");
             
             while(rs.next()){
                   

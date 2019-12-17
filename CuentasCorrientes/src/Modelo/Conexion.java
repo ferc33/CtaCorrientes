@@ -22,7 +22,7 @@ public class Conexion {
         
         Connection conn=null;
         try {
-             conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/dbcta","root","4435");
+             conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/db_cta","root","4435");
             
         } catch (SQLException ex) {
             ex.printStackTrace();

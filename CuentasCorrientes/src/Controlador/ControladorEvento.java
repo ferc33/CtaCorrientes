@@ -69,37 +69,46 @@ public class ControladorEvento {
 
         cargarModeloTabla();
         cargarModeloCombocliente();
+
         cargarModeloComboObra();
-        frameObra.comboClientes.setModel(modeloComboClientes);
 
-        /*       vista.btnLamina.addActionListener(new ActionListener() {
+        //MODIFICAR EL CLIENTE
+        this.frameCliente.btnModificarCliente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                int posicion = vista.panelMenu.getX();
-                if (posicion > -1) {
-                    Animacion.Animacion.mover_izquierda(10, -270, 5, 10, vista.panelMenu);
+                int id = (frameCliente.comboClientes.getSelectedIndex() + 1);
 
-                } else {
-                    Animacion.Animacion.mover_derecha(-270, 10, 5, 10, vista.panelMenu);
-                }
-            }
+                System.out.println(id);
 
-        });*/
-        this.frameRemito.tablaRemitos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablaGastosMouseClicked(evt);
-            }
-        });
+                String nombre = JOptionPane.showInputDialog("Modificar Cliente");
 
-        this.frameRemito.btnGuardar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
+                Cliente n = new Cliente(id, nombre);
+                bd.modificarCliente(n);
                 
+                refrescarClientes(n);
+        
+
             }
 
         });
+        //ELIMINAR CLIENTE
+        this.frameCliente.btnEliminarCliente.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                int indice = frameCliente.comboClientes.getSelectedIndex() + 1;
+
+                Cliente n = new Cliente(indice);
+
+                bd.eliminaCliente(n);
+                
+                  refrescarClientes(n);
+
+            }
+
+        });
+
 
         this.vista.btnLabelObra.addMouseListener(new MouseAdapter() {
 
@@ -108,10 +117,10 @@ public class ControladorEvento {
                 if (!frameObra.isVisible()) {
 
                     vista.laminaPrincipalAzul.add(frameObra);
-                   
+
                     frameObra.setVisible(true);
                 } else {
-                   frameObra.setVisible(false);
+                    frameObra.setVisible(false);
                 }
             }
 
@@ -122,37 +131,13 @@ public class ControladorEvento {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                /* new CambiaPanel(vista.escritorio, vista.panelMenu);
-                if (vista.btnRemito1.isSelected()) {
-                    vista.btnObra.setColorNormal(new Color(214, 217, 223));
-                    vista.btnObra.setColorHover(new Color(204, 204, 204));
-                    vista.btnObra.setColorPressed(new Color(214, 217, 223));
-
-                    vista.btnRemito1.setColorNormal(new Color(204, 204, 204));
-                    vista.btnRemito1.setColorHover(new Color(204, 204, 204));
-                    vista.btnRemito1.setColorPressed(new Color(204, 204, 204));
-
-                    vista..setColorNormal(new Color(214, 217, 223));
-                    vista.labelNuevoCliente.setColorHover(new Color(204, 204, 204));
-                    vista.labelNuevoCliente.setColorPressed(new Color(214, 217, 223));
-
-                    this.btnVerRemito.setColorNormal(new Color(214, 217, 223));
-                    this.btnVerRemito.setColorHover(new Color(204, 204, 204));
-                    this.btnVerRemito.setColorPressed(new Color(214, 217, 223));
-
-                } else {
-                    this.btnRemito1.setColorNormal(new Color(214, 217, 223));
-                    this.btnRemito1.setColorHover(new Color(204, 204, 204));
-                    this.btnRemito1.setColorPressed(new Color(214, 217, 223));
-
-                }*/
                 if (!frameRemito.isVisible()) {
 
                     vista.laminaPrincipalAzul.add(frameRemito);
-                    
+
                     frameRemito.setVisible(true);
                 } else {
-                     frameRemito.setVisible(false);
+                    frameRemito.setVisible(false);
                 }
 
             }
@@ -166,10 +151,10 @@ public class ControladorEvento {
                 if (!frameCliente.isVisible()) {
 
                     vista.laminaPrincipalAzul.add(frameCliente);
-                    
+
                     frameCliente.setVisible(true);
                 } else {
-                   
+
                     frameCliente.setVisible(false);
                 }
             }
@@ -193,6 +178,8 @@ public class ControladorEvento {
 
                 Cliente nuevoCliente = enviarCliente();
                 bd.insertNuevoCliente(nuevoCliente);
+                
+                  refrescarClientes(nuevoCliente);
             }
 
         });
@@ -220,10 +207,10 @@ public class ControladorEvento {
                     createFile.crearCarpeta(pathRemito, rutaPrincipal + "/" + nombreCarpetaCliente + "/" + nombreCarpetaObra + "/" + nombreRemito);
                     createFile.renameFile(pathRemito, rutaPrincipal + "/" + nombreCarpetaCliente + "/" + nombreCarpetaObra + "/" + numRemito + " " + fechaRemito + ".pdf");
                     createFile.moveFile(pathRemito, rutaPrincipal + "/" + nombreCarpetaCliente + "/" + nombreCarpetaObra + "/" + nombreRemito);
-                   
+
                     if (frameRemito.checkbox.isSelected()) {
                         importe = Double.parseDouble(frameRemito.txtImporteRemito.getText());
-                                                                                                        } else {
+                    } else {
                         importe = 0;
                     }
                     insertaRemito(numRemito, fechaRemito, rutaPrincipal + "/" + nombreCarpetaCliente + "/" + nombreCarpetaObra + "/" + numRemito + " " + fechaRemito + ".pdf", idObra, idCliente, importe);
@@ -246,8 +233,6 @@ public class ControladorEvento {
 
             }
         });
-
-    
 
         frameRemito.ComboClientes.addActionListener(new ActionListener() {
             @Override
@@ -283,6 +268,14 @@ public class ControladorEvento {
             }
 
         });
+
+    }
+
+ //HACE REFRESCO DE COMBOBOX DE CLIENTE
+    private void refrescarClientes(Cliente c) {
+        frameCliente.comboClientes.addItem(c);
+          frameCliente.comboClientes.setModel(modeloComboClientes);
+        modeloComboClientes.setSelectedItem(c);
 
     }
 
@@ -357,7 +350,7 @@ public class ControladorEvento {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(ControladorEvento.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
 
     }
@@ -449,12 +442,11 @@ public class ControladorEvento {
         modeloTablaRemitos.addColumn("Numero remito");
         modeloTablaRemitos.addColumn("Importe");
         modeloTablaRemitos.addColumn("Archivo");
-        
-        TableColumn colum = new TableColumn();
-        
-        
-    }
 
+        TableColumn colum = new TableColumn();
+
+    }
+//MODELO DE COMBOBOX DE CLIENTE
     private void cargarModeloCombocliente() {
         ArrayList<Cliente> listaCliente = new ArrayList<>();
         listaCliente = bd.selectClientes();
@@ -464,8 +456,10 @@ public class ControladorEvento {
 
         }
         frameRemito.ComboClientes.setModel(modeloComboClientes);
+        frameCliente.comboClientes.setModel(modeloComboClientes);
+        frameObra.comboClientes.setModel(modeloComboClientes);
     }
-
+//MODELO DE COMBOBOX DE OBRA 
     private void cargarModeloComboObra() {
         ArrayList<Obra> listaObra = new ArrayList<>();
         listaObra = bd.selectObra();
@@ -475,6 +469,7 @@ public class ControladorEvento {
 
         }
         frameRemito.ComboObra.setModel(modeloComboObra);
+        
     }
 
     //OBTIENE EL NOMBRE DEL ARCHIVO 
@@ -539,8 +534,8 @@ public class ControladorEvento {
 
                     try {
                         Desktop.getDesktop().open(new File(rutaRemito));
-                    } catch (IOException ex) {
-                        Logger.getLogger(ControladorEvento.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (Exception ex) {
+                        JOptionPane.showConfirmDialog(null, "NO SE ENCUENTRA EL REMITO" + ex);
                     }
                 }
 

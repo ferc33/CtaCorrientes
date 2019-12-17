@@ -38,10 +38,6 @@ public class Principal extends javax.swing.JFrame {
         panelBack = new java.awt.Panel();
         escritorio = new javax.swing.JDesktopPane();
         jPanel3 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnLabelCliente = new rsbuttom.RSButtonMetro();
         btnLabelObra = new rsbuttom.RSButtonMetro();
@@ -61,43 +57,6 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 69));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel5.setBackground(new java.awt.Color(24, 19, 48));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIOLETA/antialiasing_rendering2.png"))); // NOI18N
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIOLETA/ant.png"))); // NOI18N
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIOLETA/atom.png"))); // NOI18N
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel1))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(67, 67, 67)
-                .addComponent(jLabel2)
-                .addGap(39, 39, 39))
-        );
-
-        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 90, 100, 440));
 
         jPanel2.setBackground(new java.awt.Color(24, 19, 48));
         jPanel2.setForeground(new java.awt.Color(24, 19, 48));
@@ -179,13 +138,13 @@ public class Principal extends javax.swing.JFrame {
         laminaPrincipalAzul.setBackground(new java.awt.Color(24, 12, 48));
         laminaPrincipalAzul.setForeground(new java.awt.Color(51, 31, 48));
         laminaPrincipalAzul.setLayout(new java.awt.BorderLayout());
-        jPanel3.add(laminaPrincipalAzul, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 850, 440));
+        jPanel3.add(laminaPrincipalAzul, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 950, 440));
 
         escritorio.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 530));
 
         panelBack.add(escritorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 950, 530));
 
-        jPanel1.setBackground(new java.awt.Color(51, 0, 51));
+        jPanel1.setBackground(new java.awt.Color(0, 0, 51));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnLamina.setBackground(new java.awt.Color(51, 51, 51));
@@ -230,9 +189,7 @@ public class Principal extends javax.swing.JFrame {
        
     }//GEN-LAST:event_btnLaminaActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -241,13 +198,9 @@ public class Principal extends javax.swing.JFrame {
     public javax.swing.JButton btnLamina;
     public rsbuttom.RSButtonMetro btnRemito1;
     public javax.swing.JDesktopPane escritorio;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     public javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel5;
     public javax.swing.JPanel laminaPrincipalAzul;
     public java.awt.Panel panelBack;
     // End of variables declaration//GEN-END:variables

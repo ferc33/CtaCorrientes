@@ -32,7 +32,7 @@ public Component getTableCellRendererComponent(JTable table,Object value,boolean
                
            }else{
             
-               btn.setBackground(Color.BLACK);
+               btn.setBackground(new Color(0,0,16));
                btn.setForeground(UIManager.getColor("Button.background"));
            }
            
