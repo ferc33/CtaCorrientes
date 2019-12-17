@@ -69,10 +69,9 @@ public class ControladorEvento {
 
         cargarModeloTabla();
         cargarModeloCombocliente();
-
+        frameRemito.tablaRemitos.setModel(modeloTablaRemitos);
         cargarModeloComboObra();
 
-        
         //MODIFICAR EL CLIENTE
         this.frameCliente.btnModificarCliente.addActionListener(new ActionListener() {
             @Override
@@ -86,9 +85,8 @@ public class ControladorEvento {
 
                 Cliente n = new Cliente(id, nombre);
                 bd.modificarCliente(n);
-                
+
                 refrescarClientes(n);
-        
 
             }
 
@@ -101,21 +99,18 @@ public class ControladorEvento {
                 int indice = frameCliente.comboClientes.getSelectedIndex() + 1;
 
                 Cliente n = new Cliente(indice);
-                
-                if(n!=null){
-                       bd.eliminaCliente(n);
-                
-                  refrescarClientes(n);
-                }else{
+
+                if (n != null) {
+                    bd.eliminaCliente(n);
+
+                    refrescarClientes(n);
+                } else {
                     JOptionPane.showMessageDialog(null, "No se puede eliminar" + n);
                 }
-
-             
 
             }
 
         });
-
 
         this.vista.btnLabelObra.addMouseListener(new MouseAdapter() {
 
@@ -185,8 +180,8 @@ public class ControladorEvento {
 
                 Cliente nuevoCliente = enviarCliente();
                 bd.insertNuevoCliente(nuevoCliente);
-                
-                  refrescarClientes(nuevoCliente);
+
+                refrescarClientes(nuevoCliente);
             }
 
         });
@@ -276,12 +271,52 @@ public class ControladorEvento {
 
         });
 
+        this.frameRemito.tablaRemitos.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+
+                int rown = frameRemito.tablaRemitos.rowAtPoint(evt.getPoint());
+                int column = frameRemito.tablaRemitos.getColumnModel().getColumnIndexAtX(evt.getX());
+                int row = evt.getY() / frameRemito.tablaRemitos.getRowHeight();
+
+                if (row < frameRemito.tablaRemitos.getRowCount() && row >= 0 && column < frameRemito.tablaRemitos.getColumnCount() && column >= 0) {
+                    Object value = frameRemito.tablaRemitos.getValueAt(row, column);
+
+                    if (value instanceof JButton) {
+
+                        ((JButton) value).doClick();
+                        JButton boton = (JButton) value;
+                        
+                  
+
+                        if (boton.getName().equals("v")) {
+
+                            String numRemito = (String) frameRemito.tablaRemitos.getValueAt(rown, 3);
+
+                            verRemito(numRemito);
+
+                            System.out.println("REMITO ");
+
+                            try {
+                                Desktop.getDesktop().open(new File(rutaRemito));
+                            } catch (Exception ex) {
+                                JOptionPane.showConfirmDialog(null, "NO SE ENCUENTRA EL REMITO" + ex);
+                            }
+                        }
+
+                    }
+                }
+
+            }
+
+        });
     }
 
- //HACE REFRESCO DE COMBOBOX DE CLIENTE
+    //HACE REFRESCO DE COMBOBOX DE CLIENTE
     private void refrescarClientes(Cliente c) {
         frameCliente.comboClientes.addItem(c);
-          frameCliente.comboClientes.setModel(modeloComboClientes);
+        frameCliente.comboClientes.setModel(modeloComboClientes);
         modeloComboClientes.setSelectedItem(c);
 
     }
@@ -454,6 +489,7 @@ public class ControladorEvento {
 
     }
 //MODELO DE COMBOBOX DE CLIENTE
+
     private void cargarModeloCombocliente() {
         ArrayList<Cliente> listaCliente = new ArrayList<>();
         listaCliente = bd.selectClientes();
@@ -467,6 +503,7 @@ public class ControladorEvento {
         frameObra.comboClientes.setModel(modeloComboClientes);
     }
 //MODELO DE COMBOBOX DE OBRA 
+
     private void cargarModeloComboObra() {
         ArrayList<Obra> listaObra = new ArrayList<>();
         listaObra = bd.selectObra();
@@ -476,7 +513,7 @@ public class ControladorEvento {
 
         }
         frameRemito.ComboObra.setModel(modeloComboObra);
-        
+
     }
 
     //OBTIENE EL NOMBRE DEL ARCHIVO 
@@ -516,39 +553,6 @@ public class ControladorEvento {
         } catch (Exception e) {
 
             e.printStackTrace();
-        }
-
-    }
-
-    private void tablaGastosMouseClicked(java.awt.event.MouseEvent evt) {
-        int rown = this.frameRemito.tablaRemitos.rowAtPoint(evt.getPoint());
-        int column = this.frameRemito.tablaRemitos.getColumnModel().getColumnIndexAtX(evt.getX());
-        int row = evt.getY() / this.frameRemito.tablaRemitos.getRowHeight();
-
-        if (row < this.frameRemito.tablaRemitos.getRowCount() && row >= 0 && column < this.frameRemito.tablaRemitos.getColumnCount() && column >= 0) {
-            Object value = this.frameRemito.tablaRemitos.getValueAt(row, column);
-
-            if (value instanceof JButton) {
-
-                ((JButton) value).doClick();
-                JButton boton = (JButton) value;
-
-                if (boton.getName().equals("v")) {
-
-                    String numRemito = (String) this.frameRemito.tablaRemitos.getValueAt(rown, 3);
-
-                    verRemito(numRemito);
-                    
-                    System.out.println("REMITO ");
-
-                    try {
-                        Desktop.getDesktop().open(new File(rutaRemito));
-                    } catch (Exception ex) {
-                        JOptionPane.showConfirmDialog(null, "NO SE ENCUENTRA EL REMITO" + ex);
-                    }
-                }
-
-            }
         }
 
     }
