@@ -189,35 +189,29 @@ public class ControladorEvento {
 
         });
 
-        this.frameRemito.btnSubirRemito.addActionListener(new ActionListener() {
+       this.frameRemito.btnSubirRemito.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 double importe = 0;
 
                 createFile = new CrearCarpetaCliente();
                 File remito = getFile();
-                String nombreCarpetaCliente = frameRemito.ComboClientes.getSelectedItem().toString();
                 String nombreCarpetaObra = frameRemito.ComboObra.getSelectedItem().toString();
-                  
-
-                int idCliente = (frameRemito.ComboClientes.getSelectedIndex() + 1);
-                int idObra = (frameRemito.ComboObra.getSelectedIndex() + 1);
-
+                String path = "";
+                int idCliente = frameRemito.ComboClientes.getSelectedIndex() + 1;
+                int idObra = frameRemito.ComboObra.getSelectedIndex() + 1;
                 String pathRemito = remito.getAbsolutePath();
                 String numRemito = frameRemito.txtNumRemito.getText();
                 String fechaRemito = frameRemito.JDate.getText();
 
                 String nombreRemito = remito.getName();
-                
-              
-           
-                  
+                String nombreCarpetaCliente = frameRemito.ComboClientes.getSelectedItem().toString();
+
                 if (numRemito != null || fechaRemito != null) {
 
-                    createFile.crearCarpeta(pathRemito, rutaPrincipal + nombreCarpetaCliente + "/" + nombreCarpetaObra + "/" + nombreRemito);
+                    createFile.crearCarpeta(pathRemito, rutaPrincipal + "/" + nombreCarpetaCliente + "/" + nombreCarpetaObra + "/" + nombreRemito);
                     createFile.renameFile(pathRemito, rutaPrincipal + "/" + nombreCarpetaCliente + "/" + nombreCarpetaObra + "/" + numRemito + " " + fechaRemito + ".pdf");
                     createFile.moveFile(pathRemito, rutaPrincipal + "/" + nombreCarpetaCliente + "/" + nombreCarpetaObra + "/" + nombreRemito);
-
                     if (frameRemito.checkbox.isSelected()) {
                         importe = Double.parseDouble(frameRemito.txtImporteRemito.getText());
                     } else {
@@ -225,16 +219,7 @@ public class ControladorEvento {
                     }
                     insertaRemito(numRemito, fechaRemito, rutaPrincipal + "/" + nombreCarpetaCliente + "/" + nombreCarpetaObra + "/" + numRemito + " " + fechaRemito + ".pdf", idObra, idCliente, importe);
 
-                } else {
-                    System.out.println("pederna");
-                  
-                    createFile.crearCarpeta(pathRemito, rutaPrincipal + "/" + nombreCarpetaCliente + "/" + nombreCarpetaObra + "/" + nombreRemito);
-                    createFile.moveFile(pathRemito, rutaPrincipal + "/" + nombreCarpetaCliente + "/" + nombreCarpetaObra + "/" + nombreRemito);
-                    System.out.println("aqui estoy");
-                
-                
                 }
-
             }
 
         });
