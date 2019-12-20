@@ -16,13 +16,17 @@ public class CrearCarpetaCliente {
     public void crearCarpeta(String setNameCarpetaCliente, String setNameCarpetaObra) {
 
         rutaDirectorioCreado = new File(setNameCarpetaCliente, setNameCarpetaObra);
+        
+        System.out.println(rutaDirectorioCreado);
 
         if (!rutaDirectorioCreado.exists()) {
             rutaDirectorioCreado.mkdirs();
 
         }
-
+        
     }
+    
+  
 
     public void moveFile(String urlOrigen, String urlDestino) {
 
@@ -32,9 +36,10 @@ public class CrearCarpetaCliente {
 
         try {
             Files.move(origenPath, destinoPath, StandardCopyOption.REPLACE_EXISTING);
+          JOptionPane.showMessageDialog(null, "Carpeta movida");
 
         } catch (IOException e) {
-            System.err.println(e);
+            JOptionPane.showMessageDialog(null, "Carpeta no movida");
         }
 
     }
@@ -47,13 +52,12 @@ public class CrearCarpetaCliente {
         File remito2 = new File(fichero2);
 
         boolean success = remito1.renameTo(remito2);
-        
+
         if (!success) {
             System.out.println("No se ha cambiado el nombre");
-        }else{
+        } else {
             System.out.println("Se ha modificado el nombre");
         }
-                
 
     }
 

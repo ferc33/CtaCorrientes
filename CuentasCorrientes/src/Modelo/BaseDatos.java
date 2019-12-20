@@ -359,7 +359,7 @@ public class BaseDatos {
             
           
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "NO SE AH INSERTADO EL REMITO VERIFIQUE LO SIGUIENTE\nError-->" + e);
+            System.out.println("Remito no ingresado"+e);
         }
        
     }

@@ -36,6 +36,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 public class ControladorEvento {
 
@@ -68,8 +69,9 @@ public class ControladorEvento {
         this.frameRemito = frameRemito;
 
         cargarModeloTabla();
+
         cargarModeloCombocliente();
-        frameRemito.tablaRemitos.setModel(modeloTablaRemitos);
+
         cargarModeloComboObra();
 
         //MODIFICAR EL CLIENTE
@@ -84,6 +86,7 @@ public class ControladorEvento {
                 String nombre = JOptionPane.showInputDialog("Modificar Cliente");
 
                 Cliente n = new Cliente(id, nombre);
+
                 bd.modificarCliente(n);
 
                 refrescarClientes(n);
@@ -193,20 +196,25 @@ public class ControladorEvento {
 
                 createFile = new CrearCarpetaCliente();
                 File remito = getFile();
+                String nombreCarpetaCliente = frameRemito.ComboClientes.getSelectedItem().toString();
                 String nombreCarpetaObra = frameRemito.ComboObra.getSelectedItem().toString();
+                  
 
-                int idCliente = frameRemito.ComboClientes.getSelectedIndex() + 1;
-                int idObra = frameRemito.ComboObra.getSelectedIndex() + 1;
+                int idCliente = (frameRemito.ComboClientes.getSelectedIndex() + 1);
+                int idObra = (frameRemito.ComboObra.getSelectedIndex() + 1);
+
                 String pathRemito = remito.getAbsolutePath();
                 String numRemito = frameRemito.txtNumRemito.getText();
                 String fechaRemito = frameRemito.JDate.getText();
 
                 String nombreRemito = remito.getName();
-                String nombreCarpetaCliente = frameRemito.ComboClientes.getSelectedItem().toString();
-
+                
+              
+           
+                  
                 if (numRemito != null || fechaRemito != null) {
 
-                    createFile.crearCarpeta(pathRemito, rutaPrincipal + "/" + nombreCarpetaCliente + "/" + nombreCarpetaObra + "/" + nombreRemito);
+                    createFile.crearCarpeta(pathRemito, rutaPrincipal + nombreCarpetaCliente + "/" + nombreCarpetaObra + "/" + nombreRemito);
                     createFile.renameFile(pathRemito, rutaPrincipal + "/" + nombreCarpetaCliente + "/" + nombreCarpetaObra + "/" + numRemito + " " + fechaRemito + ".pdf");
                     createFile.moveFile(pathRemito, rutaPrincipal + "/" + nombreCarpetaCliente + "/" + nombreCarpetaObra + "/" + nombreRemito);
 
@@ -217,7 +225,16 @@ public class ControladorEvento {
                     }
                     insertaRemito(numRemito, fechaRemito, rutaPrincipal + "/" + nombreCarpetaCliente + "/" + nombreCarpetaObra + "/" + numRemito + " " + fechaRemito + ".pdf", idObra, idCliente, importe);
 
+                } else {
+                    System.out.println("pederna");
+                  
+                    createFile.crearCarpeta(pathRemito, rutaPrincipal + "/" + nombreCarpetaCliente + "/" + nombreCarpetaObra + "/" + nombreRemito);
+                    createFile.moveFile(pathRemito, rutaPrincipal + "/" + nombreCarpetaCliente + "/" + nombreCarpetaObra + "/" + nombreRemito);
+                    System.out.println("aqui estoy");
+                
+                
                 }
+
             }
 
         });
@@ -287,8 +304,6 @@ public class ControladorEvento {
 
                         ((JButton) value).doClick();
                         JButton boton = (JButton) value;
-                        
-                  
 
                         if (boton.getName().equals("v")) {
 
@@ -296,13 +311,15 @@ public class ControladorEvento {
 
                             verRemito(numRemito);
 
-                            System.out.println("REMITO ");
-
                             try {
                                 Desktop.getDesktop().open(new File(rutaRemito));
                             } catch (Exception ex) {
-                                JOptionPane.showConfirmDialog(null, "NO SE ENCUENTRA EL REMITO" + ex);
+                                JOptionPane.showMessageDialog(null, "El remito o carpeta no se encuentran\n verifique si no ha eliminado nada ");
+                                System.out.println(ex);
                             }
+                        } else if (boton.getName().equals("d")) {
+
+                            // int id = frameRemito.tablaRemitos.getValueAt(rown, 1);
                         }
 
                     }
@@ -349,6 +366,7 @@ public class ControladorEvento {
                     fila[3] = rs.getObject(4);
                     fila[4] = rs.getObject(5);
                     fila[5] = this.frameRemito.btnVerFactura;
+                    fila[6] = this.frameRemito.deleteRemito;
 
                 }
 
@@ -357,7 +375,7 @@ public class ControladorEvento {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(ControladorEvento.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
 
     }
@@ -384,6 +402,7 @@ public class ControladorEvento {
                     fila[3] = rs.getObject(4);
                     fila[4] = rs.getObject(5);
                     fila[5] = this.frameRemito.btnVerFactura;
+                    fila[6] = this.frameRemito.deleteRemito;
 
                 }
 
@@ -418,6 +437,7 @@ public class ControladorEvento {
                     fila[3] = rs.getObject(4);
                     fila[4] = rs.getObject(5);
                     fila[5] = this.frameRemito.btnVerFactura;
+                    fila[6] = this.frameRemito.deleteRemito;
 
                 }
 
@@ -426,7 +446,7 @@ public class ControladorEvento {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(ControladorEvento.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
 
     }
@@ -478,14 +498,15 @@ public class ControladorEvento {
     public void cargarModeloTabla() {
 
         //   modeloTablaRemitos.addColumn("Id");
-        modeloTablaRemitos.addColumn("Nombre cliente");
-        modeloTablaRemitos.addColumn("Nombre obra");
+        modeloTablaRemitos.addColumn("Cliente");
+        modeloTablaRemitos.addColumn("Obra");
         modeloTablaRemitos.addColumn("Instalador");
-        modeloTablaRemitos.addColumn("Numero remito");
+        modeloTablaRemitos.addColumn("N°remito");
         modeloTablaRemitos.addColumn("Importe");
-        modeloTablaRemitos.addColumn("Archivo");
+        modeloTablaRemitos.addColumn("Pdf");
+        modeloTablaRemitos.addColumn("Delete");
 
-        TableColumn colum = new TableColumn();
+        TableColumnModel columnModel = frameRemito.tablaRemitos.getColumnModel();
 
     }
 //MODELO DE COMBOBOX DE CLIENTE
@@ -528,8 +549,8 @@ public class ControladorEvento {
             fichero = fc.getSelectedFile();
 
             //System.out.println(path);
-        } else {
-            System.out.println("NO A ELEGIDO NADA");
+        } else if (seleccion == JFileChooser.CANCEL_OPTION) {
+
         }
         return fichero;
 
