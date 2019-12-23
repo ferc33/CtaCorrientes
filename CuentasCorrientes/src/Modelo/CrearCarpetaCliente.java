@@ -61,7 +61,7 @@ public class CrearCarpetaCliente {
 
     }
 
-    private File nombreObra;
+   
     private Path destinoPath;
     private Path origenPath;
     private File rutaDirectorioCreado;

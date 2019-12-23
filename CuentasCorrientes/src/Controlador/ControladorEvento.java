@@ -125,6 +125,7 @@ public class ControladorEvento {
 
                     frameObra.setVisible(true);
                 } else {
+                 
                     frameObra.setVisible(false);
                 }
             }
@@ -208,10 +209,14 @@ public class ControladorEvento {
                 String nombreCarpetaCliente = frameRemito.ComboClientes.getSelectedItem().toString();
 
                 if (numRemito != null || fechaRemito != null) {
-
-                    createFile.crearCarpeta(pathRemito, rutaPrincipal + "/" + nombreCarpetaCliente + "/" + nombreCarpetaObra + "/" + nombreRemito);
+                      //createFile.crearCarpeta(nombreCarpetaCliente, nombreCarpetaObra);
+                    createFile.crearCarpeta(rutaPrincipal + "/" +nombreCarpetaCliente,nombreCarpetaObra );
                     createFile.renameFile(pathRemito, rutaPrincipal + "/" + nombreCarpetaCliente + "/" + nombreCarpetaObra + "/" + numRemito + " " + fechaRemito + ".pdf");
                     createFile.moveFile(pathRemito, rutaPrincipal + "/" + nombreCarpetaCliente + "/" + nombreCarpetaObra + "/" + nombreRemito);
+                   //createFile.moveFile(pathRemito, rutaPrincipal);
+                   
+                    System.out.println(pathRemito+ " -- " + rutaPrincipal + "/" + nombreCarpetaCliente + "/" + nombreCarpetaObra + "/" + nombreRemito);
+                    
                     if (frameRemito.checkbox.isSelected()) {
                         importe = Double.parseDouble(frameRemito.txtImporteRemito.getText());
                     } else {
