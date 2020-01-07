@@ -2,14 +2,14 @@ package Controlador;
 
 import Modelo.BaseDatos;
 import Modelo.Cliente;
-import Modelo.CopiarFicheros;
 import Modelo.CrearCarpetaCliente;
 import Modelo.Obra;
 import Modelo.Remito;
-import VISTA.FrameCliente;
-import VISTA.FrameObra;
-import VISTA.FrameRemito;
-import VISTA.Principal;
+import vistaMain.FrameCliente;
+import vistaMain.FrameObra;
+import vistaMain.FrameRemito;
+import vistaMain.Principal;
+import java.awt.BorderLayout;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,30 +17,20 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 public class ControladorEvento {
 
-    public Principal vista;
+    Principal principal;
     FrameObra frameObra;
     FrameRemito frameRemito;
     FrameCliente frameCliente;
@@ -58,10 +48,10 @@ public class ControladorEvento {
 
     private String path = null;
 
-    public ControladorEvento(Principal vista, BaseDatos bd, FrameCliente frameCliente, FrameObra frameObra,
+    public ControladorEvento(Principal principal, BaseDatos bd, FrameCliente frameCliente, FrameObra frameObra,
                                                                                     FrameRemito frameRemito) {
 
-        this.vista = vista;
+        this.principal = principal;
         this.bd = bd;
 
         this.frameCliente = frameCliente;
@@ -115,54 +105,46 @@ public class ControladorEvento {
 
         });
 
-        this.vista.btnLabelObra.addMouseListener(new MouseAdapter() {
+        this.principal.btnLabelObra.addMouseListener(new MouseAdapter() {
 
             public void mousePressed(MouseEvent e) {
 
-                if (!frameObra.isVisible()) {
+                principal.escritorio.removeAll();
+                principal.escritorio.repaint();
+                principal.escritorio.add(frameObra, BorderLayout.CENTER);
 
-                    vista.laminaPrincipalAzul.add(frameObra);
+                frameObra.show();
 
-                    frameObra.setVisible(true);
-                } else {
-                 
-                    frameObra.setVisible(false);
-                }
+
             }
 
         });
 
-        this.vista.btnRemito1.addActionListener(new ActionListener() {
+        this.principal.btnRemito1.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                if (!frameRemito.isVisible()) {
+                principal.escritorio.removeAll();
+                principal.escritorio.repaint();
+                principal.escritorio.add(frameRemito, BorderLayout.CENTER);
 
-                    vista.laminaPrincipalAzul.add(frameRemito);
-
-                    frameRemito.setVisible(true);
-                } else {
-                    frameRemito.setVisible(false);
-                }
+                frameRemito.show();
 
             }
 
         });
 
-        this.vista.btnLabelCliente.addMouseListener(new MouseAdapter() {
+        this.principal.btnLabelCliente.addMouseListener(new MouseAdapter() {
 
             public void mousePressed(MouseEvent e) {
 
-                if (!frameCliente.isVisible()) {
+                principal.escritorio.removeAll();
+                principal.escritorio.repaint();
+                principal.escritorio.add(frameCliente, BorderLayout.CENTER);
 
-                    vista.laminaPrincipalAzul.add(frameCliente);
+                frameCliente.show();
 
-                    frameCliente.setVisible(true);
-                } else {
-
-                    frameCliente.setVisible(false);
-                }
             }
 
         });
@@ -190,7 +172,7 @@ public class ControladorEvento {
 
         });
 
-       this.frameRemito.btnSubirRemito.addActionListener(new ActionListener() {
+        this.frameRemito.btnSubirRemito.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 double importe = 0;
@@ -209,14 +191,14 @@ public class ControladorEvento {
                 String nombreCarpetaCliente = frameRemito.ComboClientes.getSelectedItem().toString();
 
                 if (numRemito != null || fechaRemito != null) {
-                      //createFile.crearCarpeta(nombreCarpetaCliente, nombreCarpetaObra);
-                    createFile.crearCarpeta(rutaPrincipal + "/" +nombreCarpetaCliente,nombreCarpetaObra );
+                    //createFile.crearCarpeta(nombreCarpetaCliente, nombreCarpetaObra);
+                    createFile.crearCarpeta(rutaPrincipal + "/" + nombreCarpetaCliente, nombreCarpetaObra);
                     createFile.renameFile(pathRemito, rutaPrincipal + "/" + nombreCarpetaCliente + "/" + nombreCarpetaObra + "/" + numRemito + " " + fechaRemito + ".pdf");
                     createFile.moveFile(pathRemito, rutaPrincipal + "/" + nombreCarpetaCliente + "/" + nombreCarpetaObra + "/" + nombreRemito);
-                   //createFile.moveFile(pathRemito, rutaPrincipal);
-                   
-                    System.out.println(pathRemito+ " -- " + rutaPrincipal + "/" + nombreCarpetaCliente + "/" + nombreCarpetaObra + "/" + nombreRemito);
-                    
+                    //createFile.moveFile(pathRemito, rutaPrincipal);
+
+                    System.out.println(pathRemito + " -- " + rutaPrincipal + "/" + nombreCarpetaCliente + "/" + nombreCarpetaObra + "/" + nombreRemito);
+
                     if (frameRemito.checkbox.isSelected()) {
                         importe = Double.parseDouble(frameRemito.txtImporteRemito.getText());
                     } else {
@@ -263,16 +245,16 @@ public class ControladorEvento {
 
         });
 
-        frameRemito.txtBuscarRemito.addKeyListener(new KeyAdapter() {
+        this.frameRemito.txtBuscarRemito2.addKeyListener(new KeyAdapter() {
 
-            @Override
-            public void keyPressed(KeyEvent e) {
+            public void keyReleased(KeyEvent e) {
 
                 limpiarTabla();
 
-                String criterio = frameRemito.txtBuscarRemito.getText();
+                String criterio = frameRemito.txtBuscarRemito2.getText();
 
                 recibeCTAPorCriterio(criterio);
+
                 frameRemito.tablaRemitos.setModel(modeloTablaRemitos);
             }
 
@@ -299,17 +281,24 @@ public class ControladorEvento {
 
                             String numRemito = (String) frameRemito.tablaRemitos.getValueAt(rown, 3);
 
+                            System.out.println(numRemito);
                             verRemito(numRemito);
 
                             try {
                                 Desktop.getDesktop().open(new File(rutaRemito));
                             } catch (Exception ex) {
                                 JOptionPane.showMessageDialog(null, "El remito o carpeta no se encuentran\n verifique si no ha eliminado nada ");
-                                System.out.println(ex);
+
                             }
                         } else if (boton.getName().equals("d")) {
 
-                            // int id = frameRemito.tablaRemitos.getValueAt(rown, 1);
+                       
+                          Object idCliente = frameRemito.tablaRemitos.getValueAt(rown, 0);
+                        
+                            
+                            bd.borrarRemito(idCliente);
+                            
+                           
                         }
 
                     }
@@ -332,7 +321,7 @@ public class ControladorEvento {
 
         ResultSet rs = null;
 
-        if (frameRemito.radioCliente.isSelected()) {
+        if (frameRemito.radioCliente2.isSelected()) {
 
             rs = bd.dameCtaPorCliente(criterio);
         } else {
@@ -393,6 +382,7 @@ public class ControladorEvento {
                     fila[4] = rs.getObject(5);
                     fila[5] = this.frameRemito.btnVerFactura;
                     fila[6] = this.frameRemito.deleteRemito;
+                    
 
                 }
 
@@ -487,7 +477,7 @@ public class ControladorEvento {
 
     public void cargarModeloTabla() {
 
-        //   modeloTablaRemitos.addColumn("Id");
+      // modeloTablaRemitos.addColumn("Id");
         modeloTablaRemitos.addColumn("Cliente");
         modeloTablaRemitos.addColumn("Obra");
         modeloTablaRemitos.addColumn("Instalador");
@@ -496,7 +486,7 @@ public class ControladorEvento {
         modeloTablaRemitos.addColumn("Pdf");
         modeloTablaRemitos.addColumn("Delete");
 
-        TableColumnModel columnModel = frameRemito.tablaRemitos.getColumnModel();
+      //  TableColumnModel columnModel = frameRemito.tablaRemitos.getColumnModel();
 
     }
 //MODELO DE COMBOBOX DE CLIENTE

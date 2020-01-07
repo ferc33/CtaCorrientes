@@ -143,7 +143,7 @@ public class BaseDatos {
 
             conn = miConexion.dameConexion();
 
-            ps = conn.prepareStatement("SELECT  NOM_CLIENTE,NOM_OBRA,ES_INSTALADOR_CLIENTE_,NUM_REMITO ,IMPORTE_CIERRE,ARCHIVO FROM db_cta.REMITO INNER JOIN db_cta.CLIENTE ON db_cta.REMITO.ID_CLIENTE = db_cta.CLIENTE.ID_CLIENTE INNER JOIN db_cta.OBRA ON db_cta.REMITO.ID_OBRA=db_cta.OBRA.ID_OBRA WHERE NOM_CLIENTE LIKE" + "'"+ cliente + "%'" );
+            ps = conn.prepareStatement("SELECT NOM_CLIENTE,NOM_OBRA,ES_INSTALADOR_CLIENTE_,NUM_REMITO ,IMPORTE_CIERRE,ARCHIVO FROM db_cta.REMITO INNER JOIN db_cta.CLIENTE ON db_cta.REMITO.ID_CLIENTE = db_cta.CLIENTE.ID_CLIENTE INNER JOIN db_cta.OBRA ON db_cta.REMITO.ID_OBRA=db_cta.OBRA.ID_OBRA WHERE NOM_CLIENTE LIKE" + "'"+ cliente + "%'" );
 
           
            
@@ -156,6 +156,43 @@ public class BaseDatos {
 
         return rs;
     }
+     
+     public void borrarRemito(Object id){
+         
+          
+        Connection conn = null;
+
+        Statement ps = null;
+
+        try {
+            conn = miConexion.dameConexion();
+
+            ps = conn.createStatement();
+
+            ps.executeQuery(("DELETE FROM db_cta.REMITO WHERE ID_REMITO =" + id));
+
+            
+            
+            System.out.println("RemitoEliminado");
+
+        } catch (Exception e) {
+            System.out.println("Error en delete de persona");
+
+        } finally {
+            try {
+
+                ps.close();
+                conn.close();
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+
+        }
+    }
+
+         
+     
 
      
     public ResultSet dameCtaPorObra(String nombreObra) {
